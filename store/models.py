@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 from django.utils.text import slugify
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -19,6 +21,7 @@ class Category(models.Model):
         return self.name
 
 class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
