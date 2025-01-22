@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Cart - My E-Commerce{% endblock %}
+
+{% block content %}
+    <h2>Your Cart</h2>
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>${{ item.product.price }}</td>
+                            <td>${{ item.total }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                    <input type="hidden" name="action" value="remove">
+                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <h3>Total Price: ${{ total_price }}</h3>
+        <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+{% endblock %}

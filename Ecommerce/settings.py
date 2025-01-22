@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store'
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    ]
 
 ROOT_URLCONF = 'Ecommerce.urls'
 
@@ -84,6 +85,8 @@ DATABASES = {
     }
 }
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default session engine
+SESSION_COOKIE_AGE = 1209600  # 2 weeks, adjust as needed
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
