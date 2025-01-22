@@ -142,6 +142,7 @@ class Signup(View):
         return error_message
 
 class Checkout(View):
+    # @method_decorator(login_required)
     @login_required
     def get(self, request):
         # Make sure to check for cart in session
@@ -164,6 +165,7 @@ class Checkout(View):
         # Render checkout page with the products in the cart
         return render(request, 'checkout.html', {'products': products})
 
+    # @method_decorator(login_required)
     @login_required
     def post(self, request):
         # Same cart check in the POST method
