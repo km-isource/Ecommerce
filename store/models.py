@@ -21,12 +21,13 @@ class Category(models.Model):
         return self.name
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     password = models.CharField(max_length=100)
+
     
     def register(self):
         self.save()
